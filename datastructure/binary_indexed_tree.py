@@ -2,6 +2,7 @@
 #binary indexed tree
 #which is very useful data structure
 #in certain circumstances
+#this has been commited to github
 def get(BITree,i):
     s=0 #initialize result
     
