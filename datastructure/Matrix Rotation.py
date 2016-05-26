@@ -17,9 +17,8 @@ def rotate(a,r):
 def matrixchange(a):
     a=deque([deque(i) for i in a])
     tmp=[]
-    print a
     
-    while(len(a)>1):
+    while(sum([0 if i==deque([]) else 1 for i in a])>1):
         new=[]
         new.extend(list(a.popleft()))
         for i in range(len(a)):
@@ -29,7 +28,8 @@ def matrixchange(a):
             for i in range(len(a)-1,-1,-1):
                 new.append(a[i].popleft())
         tmp.append(new)
-    if not len(a)==0:
+
+    if not sum([0 if i==deque([]) else 1 for i in a])==0:
         tmp.append(list(a[0]))
         
     return deque([deque(i) for i in tmp])
@@ -37,30 +37,39 @@ def matrixchange(a):
         
 def showmatrix(a,n,m):
     b=deque(a)
+    if n%2==0:
+        nn=n/2-1
+    else:
+        nn=n/2
     for i in range(n):
-        if i>m/2:
-            i=m-i-1
+        if i>nn:
+            i=n-i-1
         
-        j=0
-        while(j<i):
-            print b[j].pop(),
-        #print a[j].pop(),
-            j+=1
-            for _ in range(n-2*i):
+            j=0
+            while(j<i):
+                print b[j].pop(),
+                j+=1
+            for _ in range(m-2*i):
                 print b[i].pop(),
         
-        if i>0:
-            j=i-1
-            while(j>-1):
-                print b[j].popleft(),
-            j-=1
-        print '\n'
-
-        
-        
-
-    
+            if i>0:
+                j=i-1
+                while(j>-1):
+                    print b[j].popleft(),
+                    j-=1
             
-            
+        else:
+            j=0
+            while(j<i):
+                print b[j].pop(),
+                j+=1
+            for _ in range(m-2*i):
+                print b[i].popleft(),
+        
+            if i>0:
+                j=i-1
+                while(j>-1):
+                    print b[j].popleft(),
+                    j-=1
 
-
+        print '\r'
