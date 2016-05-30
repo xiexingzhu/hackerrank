@@ -12,36 +12,35 @@ n,k=map(int,raw_input().strip().split())
 
 a=map(int,raw_input().strip().split())
 
-T0=False
-T2=False
-
 if k==1:
-    print 0
+    print 1
 else:
-    c={}
     for i in range(len(a)):
-        tmp=a[i]%k
-        if not tmp==0 and not tmp*2==k:
-            if not tmp in c:
-                c[tmp]=1
-            else:
-                tmp=k-tmp
-                for key in c.keys():
-                    if not key==tmp:
-                        c[key]+=1
-        elif tmp==0:
-            T0=True
-        else:
-            T2=True
-                        
-    count=max(c.values())
+        a[i]=a[i]%k
+    tmp=Counter(a)
+    count=0
     
-    if T0 and T2:
-        count+=2
-    elif T0:
-        count+=1
-    elif T2:
-        count+=1
-   
-    
-    print count
+    if k%2==0:
+        if k/2 in tmp:
+            count+=1
+        for i in range(1,k/2):
+            if i in tmp and k-i in tmp:
+                count+=max(tmp[i],tmp[k-i])
+            elif i in tmp:
+                count+=tmp[i]
+            elif k-i in tmp:
+                count+=tmp[k-i]
+        if 0 in tmp:
+            count+=1
+        print count
+    else:
+        for i in range(1,k/2+1):
+            if i in tmp and k-i in tmp:
+                count+=max(tmp[i],tmp[k-i])
+            elif i in tmp:
+                count+=tmp[i]
+            elif k-i in tmp:
+                count+=tmp[k-i]
+        if 0 in tmp:
+            count+=1
+        print count
