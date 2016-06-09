@@ -7,7 +7,12 @@ Created on Thu Jun 09 14:50:17 2016
 hackerrank Algorithms Strings Sherlock and Valid String
 """
 from collections import Counter
+<<<<<<< HEAD
 def sherlock(a):
+=======
+def sherlock():
+    a=raw_input()
+>>>>>>> develop
     a=Counter(a)
     b=Counter(a.values()).most_common(1)[0][0]    
     
