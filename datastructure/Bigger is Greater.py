@@ -6,44 +6,27 @@ Created on Thu Jun 09 21:05:57 2016
 
 hackerrank Algorithms Sorting Bigger is Greater
 """
-def partition(ar,p,r):
-    key = ar[r]
-    i = p-1
-    for j in xrange(p,r):
-        if ar[j]<=key:
-            i=i+1
-            ar[i],ar[j]=ar[j],ar[i]
-    ar[i+1],ar[r]=ar[r],ar[i+1]
-    return i+1
-        
-def quick_sort(ar,p,r):
-    if p<r:
-        pivot = partition(ar, p, r)
-        quick_sort(ar, p, pivot-1)
-        quick_sort(ar, pivot+1, r)
-        
-    return ''
-
-def bigerisgreater(a):
-    A=list(a)
-    m=-1
+def next_permutation(arr):
     
-    for i in range(len(A)-1,0,-1):
-        if m==-1:
-            j=i
-            while(j>=0):
-                if A[i]>A[j]:
-                    m=j
-                    t=False
-                    A[i],A[j]=A[j],A[i]
-                    break
-                j-=1
-        
-    if m==-1:
+    arr=list(arr)
+    # Find non-increasing suffix
+    i = len(arr) - 1
+    while i > 0 and arr[i - 1] >= arr[i]:
+        i -= 1
+    if i <= 0:
         return 'no answer'
-    else:
-        quick_sort(A,m+1,len(A)-1)
-        #print ''.join(A)
-    return ''.join(A)
+    
+    # Find successor to pivot
+    j = len(arr) - 1
+    while arr[j] <= arr[i - 1]:
+        j -= 1
+    arr[i - 1], arr[j] = arr[j], arr[i - 1]
+    
+    # Reverse suffix
+    arr[i : ] = arr[len(arr) - 1 : i - 1 : -1]
+    return ''.join(arr)
+
+for _ in range(input()):
+    print next_permutation(raw_input())
     
 
